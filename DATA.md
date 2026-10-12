@@ -7,7 +7,7 @@ The private industrial dataset used in this project was provided by **Desert Tec
 | EL images, annotations and ROI crops from Desert Technologies | Proprietary; shared for academic use |
 | Trained model weights | Trained on the proprietary data |
 | The partner's inspection standard, acceptance thresholds and recommendation texts | Internal, manufacturer-specific rules |
-| Web-application source, credentials, database dumps and uploaded inspection images | Contain credentials, rules and real inspection data |
+| System application source (front end and back end), credentials, database dumps and uploaded inspection images | Contain credentials, rules and real inspection data |
 
 Notebook outputs are cleared so that no dataset images are embedded in them.
 

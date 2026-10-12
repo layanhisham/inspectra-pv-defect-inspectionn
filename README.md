@@ -34,13 +34,13 @@ It is a two-stage pipeline, evaluated on a **public** EL dataset and on a **priv
 1. **Localisation** – an object detector (RT-DETR-X or YOLO11s) finds defects on the full panel image.
 2. **Classification** – each detected region is cropped and classified (ResNet50 or EfficientNet-B0) into one of four defect types.
 
-The selected models (**RT-DETR-X + EfficientNet-B0**) are integrated into a web application used by inspectors and administrators.
+The selected models (**RT-DETR-X + EfficientNet-B0**) are integrated into a closed, internal inspection system used by inspectors and administrators.
 
 **Highlights**
 
 - Two-stage pipeline: detect where, then classify what, with two detectors and two classifiers compared on two datasets.
 - Private-data results: RT-DETR-X **49.05 % mAP@50** for localisation and EfficientNet-B0 **87.46 %** accuracy for classification.
-- End-to-end web app: upload an EL image, get an annotated result with severity and recommendation, history, dashboard and a PDF report.
+- End-to-end inspection system: upload an EL image, get an annotated result with severity and recommendation, history, dashboard and a PDF report.
 
 > Graduation project, B.Sc. Computer Science, Imam Abdulrahman Bin Faisal University (IAU), 2025–2026, supervised by **Dr. Dhiaa A. Musleh**, in collaboration with **Desert Technologies**. The project belongs to the supervisor and the university.
 
@@ -61,7 +61,7 @@ flowchart LR
 
 Selected models: **RT-DETR-X + EfficientNet-B0**. The same flow was run on the public dataset (Roboflow EL-Images) and the private one.
 
-### Inference flow in the web application
+### Inference flow in the system
 
 ```mermaid
 flowchart LR
@@ -110,7 +110,7 @@ Per-class mAP@50 of RT-DETR-X on the private validation set: Micro-crack **83.2 
 - Public and private results come from different datasets (different classes, image quality and annotation style), so compare models *within* a dataset rather than across them.
 - Images come from controlled indoor EL setups; outdoor / drone imagery is future work.
 
-## Web application
+## InSpectra system
 
 React + Vite + Tailwind front end, FastAPI back end, PostgreSQL storage, PDF reports. Role-based access (admin / inspector), JWT in an HTTP-only cookie, bcrypt-hashed passwords.
 
@@ -165,7 +165,7 @@ Full walkthrough: [**demo videos (Drive)**](https://drive.google.com/drive/folde
 - **Admin:** user management and system logs.
 - A rule-based assessment engine turns detections into a panel-level verdict. The rules are manufacturer-specific and **are not part of this repository**.
 
-This repository contains the machine-learning pipeline. The web-application source is not included.
+This repository contains the machine-learning pipeline. The system's application source (front end and back end) is not included.
 
 ## Repository structure
 
