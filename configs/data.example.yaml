@@ -1,0 +1,8 @@
+# Example Ultralytics dataset config for the 4-class schema used in the notebooks.
+# Copy to <dataset_root>/data.yaml and adjust. Real data.yaml files are git-ignored.
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 4
+names: ['Black spot', 'Cell Scratch', 'Cells class difference', 'Micro-crack']

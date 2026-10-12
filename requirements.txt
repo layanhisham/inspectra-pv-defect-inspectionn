@@ -1,0 +1,13 @@
+# Tested on Google Colab: Python 3.12, PyTorch 2.10, CUDA 12.8, Ultralytics 8.4.48
+# Python 3.10-3.12 (notebook 01 uses `imghdr`, removed in Python 3.13)
+ultralytics>=8.4.47
+torch>=2.2
+torchvision>=0.17
+opencv-python>=4.8
+numpy
+matplotlib
+seaborn
+scikit-learn
+tqdm
+pyyaml
+jupyterlab

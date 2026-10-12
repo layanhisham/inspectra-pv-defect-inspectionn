@@ -1,0 +1,13 @@
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+  - repo: local
+    hooks:
+      - id: check-notebooks
+        name: check for outputs, private paths and secrets
+        entry: python scripts/check_repo.py
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,49 @@
+# --- Data (never commit: proprietary / large) ---
+data/
+datasets/
+*_dataset*/
+runs/
+*.cache
+*.zip
+*.tar
+*.tar.gz
+
+# --- Images (only curated screenshots in docs/assets are allowed) ---
+*.jpg
+*.jpeg
+*.bmp
+*.tif
+*.tiff
+*.png
+!docs/assets/*.png
+
+# --- Trained models / exports (trained on proprietary data) ---
+*.pt
+*.pth
+*.onnx
+*.torchscript
+*.tflite
+*.engine
+*.h5
+*.ckpt
+*.safetensors
+
+# --- Secrets / environment ---
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials*.json
+data.yaml
+
+# --- Items waiting for written approval (see DATA_NOTICE.md) ---
+_pending_approval/
+
+# --- Python / Jupyter / OS ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
