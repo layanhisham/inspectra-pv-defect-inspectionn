@@ -21,7 +21,7 @@ A hybrid deep-learning pipeline that detects and classifies defects in photovolt
 
 </div>
 
-<!-- Enable after written approval from the data owner and the university (see DATA_NOTICE.md):
+<!-- Enable after written approval from the data owner and the university (see DATA.md):
 <p align="center"><img src="docs/assets/poster.png" width="420" alt="Graduation showcase poster"></p>
 -->
 
@@ -180,7 +180,7 @@ This repository contains the machine-learning pipeline. The web-application sour
 ├── configs/data.example.yaml                             # dataset config template
 ├── docs/methodology.md                                   # preprocessing & training settings
 ├── scripts/check_repo.py                                 # guards against leaking data/outputs
-├── DATA_NOTICE.md                                        # what is (not) published, and why
+├── DATA.md                                               # data availability
 └── requirements.txt
 ```
 
@@ -204,7 +204,7 @@ Local setup: `pip install -r requirements.txt`.
 
 ## Data and confidentiality
 
-The private dataset (provided by Desert Technologies), annotations, trained weights and the manufacturer's inspection rules are proprietary and are **not** published. Notebook outputs were removed because they contained images from that dataset. Details and contributor rules: [`DATA_NOTICE.md`](DATA_NOTICE.md). Before committing, run `python scripts/check_repo.py` (also runs in CI).
+The private dataset (provided by Desert Technologies), its annotations, the trained weights and the manufacturer's inspection rules are proprietary and are **not** published. Notebook outputs are cleared so that no dataset images are embedded. See [`DATA.md`](DATA.md).
 
 ## Future work
 

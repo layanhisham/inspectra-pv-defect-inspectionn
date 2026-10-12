@@ -37,7 +37,7 @@ runs/
 credentials*.json
 data.yaml
 
-# --- Items waiting for written approval (see DATA_NOTICE.md) ---
+# --- Items waiting for written approval (see DATA.md) ---
 _pending_approval/
 
 # --- Python / Jupyter / OS ---
