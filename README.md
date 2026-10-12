@@ -107,6 +107,7 @@ Per-class mAP@50 of RT-DETR-X on the private validation set: Micro-crack **83.2 
 - The validation sets are small (private: 29 images / 311 annotated defects). Single runs, no confidence intervals.
 - On the private data, EfficientNet-B0 vs ResNet50 differs by **one validation crop** (272 vs 271 of 311), so the two are statistically indistinguishable; EfficientNet-B0 was kept for its efficiency.
 - Detection mAP@50 of about 49 % is a baseline: micro-cracks are found reliably, scratches and black spots much less so. Better and larger data is the main lever.
+- Public and private results come from different datasets (different classes, image quality and annotation style), so compare models *within* a dataset rather than across them.
 - Images come from controlled indoor EL setups; outdoor / drone imagery is future work.
 
 ## Web application
@@ -115,13 +116,17 @@ React + Vite + Tailwind front end, FastAPI back end, PostgreSQL storage, PDF rep
 
 ### Inspector
 
-| Home | Upload EL image | Results |
+| Home | Upload EL image | Dashboard |
 |:-:|:-:|:-:|
-| <img src="docs/assets/ui-inspector-home.png" width="320"> | <img src="docs/assets/ui-inspector-upload.png" width="320"> | <img src="docs/assets/ui-inspector-results.png" width="320"> |
+| <img src="docs/assets/ui-inspector-home.png" width="320"> | <img src="docs/assets/ui-inspector-upload.png" width="320"> | <img src="docs/assets/ui-inspector-dashboard.png" width="320"> |
 
-| History | Dashboard | PDF report |
-|:-:|:-:|:-:|
-| <img src="docs/assets/ui-inspector-history.png" width="320"> | <img src="docs/assets/ui-inspector-dashboard.png" width="320"> | <img src="docs/assets/ui-pdf-report.png" width="320"> |
+| Results: annotated image and summary | Results: original image and details |
+|:-:|:-:|
+| <img src="docs/assets/ui-inspector-results.png" width="480"> | <img src="docs/assets/ui-inspector-results-details.png" width="480"> |
+
+| History | PDF report |
+|:-:|:-:|
+| <img src="docs/assets/ui-inspector-history.png" width="480"> | <img src="docs/assets/ui-pdf-report.png" width="300"> |
 
 ### Admin
 
@@ -217,6 +222,7 @@ Supervisor: **Dr. Dhiaa A. Musleh** — College of Computer Science and Informat
 - **Desert Technologies** for the collaboration and for providing the industrial EL dataset for academic use.
 - **Dr. Dhiaa A. Musleh** and **Imam Abdulrahman Bin Faisal University** for supervision and support.
 - Public dataset: [*EL-Images*](https://universe.roboflow.com/venkata-prasanth/el-images-p2ove) by Venkata Prasanth, Roboflow Universe, CC BY 4.0.
+  We also trained and evaluated the pipeline on it as a public benchmark. It uses a different 3-class taxonomy (Branch crack, Isolation area, Micro-crack) and different imaging conditions from the industrial data, so its results are reported separately and are not directly comparable to the private-data results.
 
 ## License
 
