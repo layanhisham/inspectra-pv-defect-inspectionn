@@ -19,7 +19,7 @@
 
 ## Reproducing the work
 
-Use your own YOLO-format EL dataset, or the public [EL-Images](https://universe.roboflow.com/venkata-prasanth/el-images-p2ove) dataset (CC BY 4.0, 3 classes). Reported private-data results cannot be reproduced without access to the partner dataset.
+Use your own YOLO-format EL dataset and adjust the class names in the notebooks. Reported private-data results cannot be reproduced without access to the partner dataset.
 
 ## Rules for contributors
 

@@ -8,7 +8,6 @@ A hybrid deep-learning pipeline that detects and classifies defects in photovolt
 
 ![Python](https://img.shields.io/badge/Python-3.10--3.12-3776AB?logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.x-EE4C2C?logo=pytorch&logoColor=white)
-![Ultralytics](https://img.shields.io/badge/Ultralytics-111F68)
 ![YOLO11s](https://img.shields.io/badge/Detector-YOLO11s-00A3E0)
 ![RT-DETR-X](https://img.shields.io/badge/Detector-RT--DETR--X-7B2FF7)
 ![ResNet50](https://img.shields.io/badge/Classifier-ResNet50-EE4C2C)
@@ -36,6 +35,12 @@ It is a two-stage pipeline, evaluated on a **public** EL dataset and on a **priv
 2. **Classification** – each detected region is cropped and classified (ResNet50 or EfficientNet-B0) into one of four defect types.
 
 The selected models (**RT-DETR-X + EfficientNet-B0**) are integrated into a web application used by inspectors and administrators.
+
+**Highlights**
+
+- Two-stage pipeline: detect where, then classify what, with two detectors and two classifiers compared on two datasets.
+- Private-data results: RT-DETR-X **49.05 % mAP@50** for localisation and EfficientNet-B0 **87.46 %** accuracy for classification.
+- End-to-end web app: upload an EL image, get an annotated result with severity and recommendation, history, dashboard and a PDF report.
 
 > Graduation project, B.Sc. Computer Science, Imam Abdulrahman Bin Faisal University (IAU), 2025–2026, supervised by **Dr. Dhiaa A. Musleh**, in collaboration with **Desert Technologies**. The project belongs to the supervisor and the university.
 
@@ -108,17 +113,46 @@ Per-class mAP@50 of RT-DETR-X on the private validation set: Micro-crack **83.2 
 
 React + Vite + Tailwind front end, FastAPI back end, PostgreSQL storage, PDF reports. Role-based access (admin / inspector), JWT in an HTTP-only cookie, bcrypt-hashed passwords.
 
-| Inspector home | Admin home | PDF report |
+### Inspector
+
+| Home | Upload EL image | Results |
 |:-:|:-:|:-:|
-| <img src="docs/assets/ui-inspector-home.png" width="300"> | <img src="docs/assets/ui-admin-home.png" width="300"> | <img src="docs/assets/ui-pdf-report.png" width="300"> |
+| <img src="docs/assets/ui-inspector-home.png" width="320"> | <img src="docs/assets/ui-inspector-upload.png" width="320"> | <img src="docs/assets/ui-inspector-results.png" width="320"> |
 
-| Home | New inspection | Processing |
+| History | Dashboard | PDF report |
 |:-:|:-:|:-:|
-| <img src="docs/assets/ui-home.png" width="300"> | <img src="docs/assets/ui-new-inspection.png" width="300"> | <img src="docs/assets/ui-processing.png" width="300"> |
+| <img src="docs/assets/ui-inspector-history.png" width="320"> | <img src="docs/assets/ui-inspector-dashboard.png" width="320"> | <img src="docs/assets/ui-pdf-report.png" width="320"> |
 
-**Architecture:** React client → FastAPI back end (JWT auth) → PostgreSQL (Supabase) for metadata and a storage folder for inspection images.
+### Admin
 
-<p align="center"><img src="docs/assets/arch-system.png" width="420" alt="System architecture"></p>
+| Admin home | Inspection history |
+|:-:|:-:|
+| <img src="docs/assets/ui-admin-home.png" width="480"> | <img src="docs/assets/ui-admin-history.png" width="480"> |
+| **User management** | **System audit logs** |
+| <img src="docs/assets/ui-admin-users.png" width="480"> | <img src="docs/assets/ui-admin-logs.png" width="480"> |
+
+The screenshots use demo accounts and test data.
+
+### System architecture
+
+```mermaid
+flowchart TB
+    subgraph Client["Client layer"]
+        UI[React + Vite frontend]
+    end
+    subgraph App["Application layer"]
+        API[FastAPI backend<br/>JWT auth · RBAC · AI orchestration]
+        ML[RT-DETR-X → EfficientNet-B0<br/>assessment engine]
+    end
+    subgraph Data["Data layer"]
+        DB[(PostgreSQL / Supabase)]
+        FS[[Image storage]]
+    end
+    UI <-->|API requests · JWT| API
+    API --> ML
+    API <-->|SQL queries| DB
+    API -->|save images| FS
+```
 
 Full walkthrough: [**demo videos (Drive)**](https://drive.google.com/drive/folders/1bsAReEUwmxozrBx8bYj9a-N0-e6rPsRl).
 
@@ -159,7 +193,7 @@ inspectra/
 
 1. Copy `configs/data.example.yaml` to your dataset root as `data.yaml`.
 2. Run the notebooks in order `01 → 05` and adjust the paths in each *Configuration* cell.
-3. For the public alternative use [EL-Images (Roboflow Universe)](https://universe.roboflow.com/venkata-prasanth/el-images-p2ove) – 3 classes, so update `CLASS_NAMES` and the oversampled class id.
+3. The notebooks are set up for the 4-class defect taxonomy (Black spot, Cell scratch, Cells class difference, Micro-crack). With a different dataset, update `CLASS_NAMES` and the oversampled class id.
 
 Local setup: `pip install -r requirements.txt`.
 
@@ -182,9 +216,8 @@ Supervisor: **Dr. Dhiaa A. Musleh** — College of Computer Science and Informat
 
 - **Desert Technologies** for the collaboration and for providing the industrial EL dataset for academic use.
 - **Dr. Dhiaa A. Musleh** and **Imam Abdulrahman Bin Faisal University** for supervision and support.
-- Public dataset: *EL-Images* by Venkata Prasanth, Roboflow Universe, CC BY 4.0.
-- [Ultralytics](https://github.com/ultralytics/ultralytics) (AGPL-3.0) for YOLO11 and RT-DETR; [PyTorch](https://pytorch.org/) / torchvision for the classifiers.
+- Public dataset: [*EL-Images*](https://universe.roboflow.com/venkata-prasanth/el-images-p2ove) by Venkata Prasanth, Roboflow Universe, CC BY 4.0.
 
 ## License
 
-The project was developed at, and belongs to, the supervisor Dr. Dhiaa A. Musleh and Imam Abdulrahman Bin Faisal University (IAU). Code and documentation: [MIT](LICENSE). Datasets and trained models are not covered. Note that Ultralytics is AGPL-3.0, which matters if you deploy a service built on it.
+The project was developed at, and belongs to, the supervisor Dr. Dhiaa A. Musleh and Imam Abdulrahman Bin Faisal University (IAU). Code and documentation: [MIT](LICENSE). Datasets and trained models are not covered.
